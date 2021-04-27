@@ -282,7 +282,7 @@ err:
 }
 
 - (NSData *)tokenSession:(TKTokenSession *)session signData:(NSData *)dataToSign usingKey:(TKTokenObjectID)keyObjectID algorithm:(TKTokenKeyAlgorithm *)algorithm error:(NSError * _Nullable __autoreleasing *)error {
-    sc_log(self.OpenSCToken.ctx, "Performing %s with key %s", [algorithm.description UTF8String], sc_dump_hex([keyObjectID bytes], [keyObjectID length]));
+    sc_log(self.OpenSCToken.ctx, "Performing %s with key %s and %"SC_FORMAT_LEN_SIZE_T" bytes of data", [algorithm.description UTF8String], sc_dump_hex([keyObjectID bytes], [keyObjectID length]), [dataToSign length]);
 
     struct sc_pkcs15_id p15id = dataToId(keyObjectID);
     struct sc_pkcs15_object *prkey_obj = NULL;
@@ -349,7 +349,7 @@ err:
 }
 
 - (NSData *)tokenSession:(TKTokenSession *)session decryptData:(NSData *)ciphertext usingKey:(TKTokenObjectID)keyObjectID algorithm:(TKTokenKeyAlgorithm *)algorithm error:(NSError * _Nullable __autoreleasing *)error {
-    sc_log(self.OpenSCToken.ctx, "Performing %s with key %s", [algorithm.description UTF8String], sc_dump_hex([keyObjectID bytes], [keyObjectID length]));
+    sc_log(self.OpenSCToken.ctx, "Performing %s with key %s and %"SC_FORMAT_LEN_SIZE_T" bytes of data", [algorithm.description UTF8String], sc_dump_hex([keyObjectID bytes], [keyObjectID length]), [ciphertext length]);
 
     struct sc_pkcs15_id p15id = dataToId(keyObjectID);
     struct sc_pkcs15_object *prkey_obj = NULL;
