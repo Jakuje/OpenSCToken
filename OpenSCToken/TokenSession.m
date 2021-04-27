@@ -283,7 +283,7 @@ err:
 
 - (NSData *)tokenSession:(TKTokenSession *)session signData:(NSData *)dataToSign usingKey:(TKTokenObjectID)keyObjectID algorithm:(TKTokenKeyAlgorithm *)algorithm error:(NSError * _Nullable __autoreleasing *)error {
     sc_log(self.OpenSCToken.ctx, "Performing %s with key %s", [algorithm.description UTF8String], sc_dump_hex([keyObjectID bytes], [keyObjectID length]));
-    sc_log_hex(self.OpenSCToken.ctx, "signData", [signData bytes], [signData length]);
+    sc_log_hex(self.OpenSCToken.ctx, "data to sign", [dataToSign bytes], [dataToSign length]);
 
     struct sc_pkcs15_id p15id = dataToId(keyObjectID);
     struct sc_pkcs15_object *prkey_obj = NULL;
